@@ -21,3 +21,8 @@
 .App-link {
   color: #61dafb;
 }
+
+.ct-series-a .ct-line {
+  stroke-width: 2px;
+  stroke: rgb(61, 102, 155) !important;
+}
