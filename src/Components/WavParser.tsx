@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import WavGrapher from './WavGrapher'
+import Graph from './Graph';
+import Autocorrelation from './Autocorrelation';
 
 const WavParser: React.FC<{}> = () => {
     const [audio, setAudio] = useState<Float32Array>(null);
@@ -19,27 +20,37 @@ const WavParser: React.FC<{}> = () => {
             if (event.target.result) {
                 audioContext.decodeAudioData(reader.result as ArrayBuffer).then(buffer => {
                     const audio: Float32Array = buffer.getChannelData(0);
-                    setAudio(audio);
+                    // preprocess
+                    let maxAmplitude = 0;
+                    for (const amplitude of audio) {
+                        maxAmplitude = Math.max(maxAmplitude, Math.abs(amplitude));
+                    }
+                    const threshold = maxAmplitude * 0.1;
+                    const playStart = audio.findIndex(val => val >= threshold);
+                    const playEnd = audio.length - [...audio].reverse().findIndex(val => val >= threshold);
+                    console.log(playStart, playEnd);
+
+                    setAudio(audio.slice(playStart, playEnd));
                 });
             }
         };
 
         reader.onload = onFileLoad;
         reader.readAsArrayBuffer(file);
-    }
+    };
 
-    let graph = null;
-    if (audio) {
-        graph = <WavGrapher audio={audio} />
-    }
+    const graph = audio ? <Graph array={audio} windowSize={1000} title="Waveform" /> : null;
+    const autocorrelation = audio ? <Autocorrelation audio={audio} /> : null;
 
     // TODO: Add upload button
     return (
         <div style={{ padding: '2vh' }}>
-            <input type='file' accept='.wav' onChange={handleChange} />
+            <div hidden={audio !== null}>Upload a .wav file below: <br /> <br /> </div>
+            <input type='file' accept='.wav' onChange={handleChange} hidden={audio !== null} />
             {graph}
+            {autocorrelation}
         </div>
-    )
+    );
 };
 
 export default WavParser;

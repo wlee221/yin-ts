@@ -1,28 +1,28 @@
 .App {
-  text-align: center;
+    text-align: left;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .App-header {
-  background-color: #282c34;
-  padding: 2vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    padding: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .ct-series-a .ct-line {
-  stroke-width: 2px;
-  stroke: rgb(61, 102, 155) !important;
+    stroke-width: 2px;
+    stroke: rgb(61, 102, 155) !important;
 }

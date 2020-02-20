@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import WavParser from './Components/WavParser'
+import WavParser from './Components/WavParser';
 
 function App() {
     return (
