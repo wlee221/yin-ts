@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Graph from './Graph';
 import Autocorrelation from './Autocorrelation';
+import Difference from './Difference';
 
 const WavParser: React.FC<{}> = () => {
     const [audio, setAudio] = useState<Float32Array>(null);
@@ -41,6 +42,7 @@ const WavParser: React.FC<{}> = () => {
 
     const graph = audio ? <Graph array={audio} windowSize={1000} title="Waveform" /> : null;
     const autocorrelation = audio ? <Autocorrelation audio={audio} /> : null;
+    const difference = audio ? <Difference audio = {audio} /> : null;
 
     // TODO: Add upload button
     return (
@@ -49,6 +51,7 @@ const WavParser: React.FC<{}> = () => {
             <input type='file' accept='.wav' onChange={handleChange} hidden={audio !== null} />
             {graph}
             {autocorrelation}
+            {difference}
         </div>
     );
 };
