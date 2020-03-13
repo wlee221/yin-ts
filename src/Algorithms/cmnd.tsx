@@ -6,6 +6,7 @@
  */
 
 import { difference } from './difference';
+import * as Util from '../Util/util';
 
 export const cumMeanNormDiff = (window: number, startIndex: number, audio: Float32Array) => {
     if (window >= audio.length) {
@@ -28,12 +29,8 @@ export const cumMeanNormDiff = (window: number, startIndex: number, audio: Float
         cmnd[tau] = diff[tau] / denominator;
     }
 
-    const minVal = Math.min(...cmnd.slice(20));
-    const minIndex = cmnd.findIndex((val, idx) => val === minVal && idx > 0);
-
-    const sampleRate = (new AudioContext()).sampleRate;
-    const freq = sampleRate / minIndex;
-    console.log({ cmnd, sampleRate, minIndex, freq });
+    const minIndex = Util.getMinIndex(cmnd);
+    const freq = Util.numSamplesToFreq(minIndex);
 
     return { cmnd, freq };
 };

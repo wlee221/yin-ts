@@ -4,6 +4,8 @@
  * @param startIndex {number} - starting index of the summation
  * @param audio {Float32Array} - Decoded audio array
  */
+import * as Util from '../Util/util';
+
 export const autocorrelate = (window: number, startIndex: number, audio: Float32Array) => {
     if (window >= audio.length) {
         throw new Error('window size must be smaller than the size of the audio');
@@ -25,12 +27,8 @@ const autocorrelateType1 = (window: number, startIndex: number, audio: Float32Ar
         }
         acf[tau] = sum;
     }
-    const maxVal = Math.max(...acf.slice(20)); // find the highest nonzero lag autocorrelation value. Ignores first 10 samples (1/2450 s)
-    const maxIndex = acf.findIndex((val, idx) => val === maxVal && idx > 0);
-
-    const sampleRate = (new AudioContext()).sampleRate;
-    const freq = sampleRate / maxIndex;
-    console.log({ sampleRate, maxIndex, freq });
+    const maxIndex = Util.getMaxIndex(acf, 20); // find the highest nonzero lag autocorrelation value.
+    const freq = Util.numSamplesToFreq(maxIndex);
 
     return { acf, freq };
 };
