@@ -12,11 +12,6 @@ export const autocorrelate = (window: number, startIndex: number, audio: Float32
     } else if (startIndex + window >= audio.length) {
         throw new Error('Given window goes out of bound of the audio.');
     }
-    return autocorrelateType1(window, startIndex, audio);
-};
-
-// Equation (2.5), Mcleod
-const autocorrelateType1 = (window: number, startIndex: number, audio: Float32Array) => {
     const acf: Array<number> = [];  // autocorrelation function
     const halfWindow = Math.floor(window / 2);
 

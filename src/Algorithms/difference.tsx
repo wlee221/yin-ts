@@ -12,11 +12,10 @@ export const difference = (window: number, startIndex: number, audio: Float32Arr
     } else if (startIndex + window >= audio.length) {
         throw new Error('Given window goes out of bound of the audio.');
     }
-
     const diff: Array<number> = [];
     const halfWindow = Math.floor(window / 2);
-
     diff[0] = 0; // difference for zero lag is zero
+
     for (let tau = 1; tau <= halfWindow; tau++) {
         let sum = 0;
         for (let i = startIndex; i < startIndex + window; i++) {
@@ -27,6 +26,5 @@ export const difference = (window: number, startIndex: number, audio: Float32Arr
 
     const minIndex = Util.getMinIndex(diff, 20);
     const freq = Util.numSamplesToFreq(minIndex);
-
     return { diff, freq };
 };

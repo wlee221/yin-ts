@@ -10,10 +10,10 @@ const startTime = 1000;
 
 const Autocorrelation: React.FC<Prop> = ({ audio }: Prop) => {
     // const sampleRate = (new AudioContext()).sampleRate;
-    const {acf, freq} = autocorrelate(windowSize, startTime, audio);
-    const graph = <Graph array = {acf} title='Autocorrelation Function'/>;
+    const { acf, freq } = autocorrelate(windowSize, startTime, audio);
+    const graph = <Graph array={acf} title='Autocorrelation Function' />;
     return <div>
-        Autocorrelation:<br/>
+        Autocorrelation:<br />
         Frequency: {freq}.
         {graph}
     </div>;

@@ -10,10 +10,10 @@ const startTime = 1000;
 
 const Difference: React.FC<Prop> = ({ audio }: Prop) => {
     // const sampleRate = (new AudioContext()).sampleRate;
-    const {diff, freq} = difference(windowSize, startTime, audio);
-    const graph = <Graph array = {diff} title='Difference Function'/>;
+    const { diff, freq } = difference(windowSize, startTime, audio);
+    const graph = <Graph array={diff} title='Difference Function' />;
     return <div>
-        Difference:<br/>
+        Difference:<br />
         Frequency: {freq}.
         {graph}
     </div>;
