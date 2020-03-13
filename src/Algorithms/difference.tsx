@@ -14,7 +14,8 @@ export const difference = (window: number, startIndex: number, audio: Float32Arr
     const diff: Array<number> = [];
     const halfWindow = Math.floor(window / 2);
 
-    for (let tau = 0; tau <= halfWindow; tau++) {
+    diff[0] = 0; // difference for zero lag is zero
+    for (let tau = 1; tau <= halfWindow; tau++) {
         let sum = 0;
         for (let i = startIndex; i < startIndex + window; i++) {
             sum += Math.pow(audio[i] - audio[i + tau], 2);
