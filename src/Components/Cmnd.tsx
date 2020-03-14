@@ -9,7 +9,6 @@ const windowSize = 500;
 const startTime = 1000;
 
 const Cmnd: React.FC<Prop> = ({ audio }: Prop) => {
-    // const sampleRate = (new AudioContext()).sampleRate;
     const { cmnd, freq } = cumMeanNormDiff(windowSize, startTime, audio);
     const graph = <Graph array={cmnd} title='cmnd' />;
     return <div>

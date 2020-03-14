@@ -9,7 +9,6 @@ const windowSize = 500;
 const startTime = 1000;
 
 const Difference: React.FC<Prop> = ({ audio }: Prop) => {
-    // const sampleRate = (new AudioContext()).sampleRate;
     const { diff, freq } = difference(windowSize, startTime, audio);
     const graph = <Graph array={diff} title='Difference Function' />;
     return <div>

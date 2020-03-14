@@ -8,7 +8,6 @@ const windowSize = 1000;
 const startTime = 500;
 
 const AbsoluteThreshold: React.FC<Prop> = ({ audio }: Prop) => {
-    // const sampleRate = (new AudioContext()).sampleRate;
     const { freq } = absoluteTreshold(windowSize, startTime, audio);
     return <div>
         AbsoluteThreshold:<br />
