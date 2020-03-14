@@ -3,7 +3,8 @@ import Graph from './Graph';
 import Autocorrelation from './Autocorrelation';
 import Difference from './Difference';
 import Cmnd from './Cmnd';
-import AbsoluteTreshold from './AbsoluteThreshold'
+import AbsoluteTreshold from './AbsoluteThreshold';
+import Interpolation from './Interpolation';
 
 const WavParser: React.FC<{}> = () => {
     const [audio, setAudio] = useState<Float32Array>(null);
@@ -46,6 +47,7 @@ const WavParser: React.FC<{}> = () => {
     const difference = audio ? <Difference audio={audio} /> : null;
     const cmnd = audio ? <Cmnd audio={audio} /> : null;
     const absoluteThreshold = audio ? <AbsoluteTreshold audio={audio} /> : null;
+    const intepolation = audio ? <Interpolation audio={audio} /> : null;
 
     // TODO: Add upload button
     return (
@@ -57,6 +59,7 @@ const WavParser: React.FC<{}> = () => {
             {difference}
             {cmnd}
             {absoluteThreshold}
+            {intepolation}
         </div>
     );
 };

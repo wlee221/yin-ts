@@ -22,5 +22,5 @@ export const absoluteTreshold = (window: number, startIndex: number, audio: Floa
     while (minIndex + 1 < cmnd.length && cmnd[minIndex + 1] < cmnd[minIndex]) minIndex++; // advance towards local minimum
 
     const freq = Util.numSamplesToFreq(minIndex);
-    return { cmnd, freq };
+    return { cmnd, freq, minIndex };
 };
