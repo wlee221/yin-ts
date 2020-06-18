@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, {useState, useRef} from 'react';
 import Graph from './Graph';
 import Autocorrelation from './Autocorrelation';
 import Difference from './Difference';
 import Cmnd from './Cmnd';
 import AbsoluteTreshold from './AbsoluteThreshold';
 import Interpolation from './Interpolation';
+import {Form, Button} from 'react-bootstrap';
 
 const WavParser: React.FC<{}> = () => {
     const [audio, setAudio] = useState<Float32Array>(null);
+    const fileRef = useRef<HTMLInputElement>();
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (files && files.length !== 0) {
-            parseWav(files[0]);
-        }
-    };
+    if (fileRef.current !== undefined) {
+        console.log(fileRef.current.files[0]);
+    }
 
     const parseWav = (file: File) => {
         const reader = new FileReader();
@@ -49,11 +48,23 @@ const WavParser: React.FC<{}> = () => {
     const absoluteThreshold = audio ? <AbsoluteTreshold audio={audio} /> : null;
     const intepolation = audio ? <Interpolation audio={audio} /> : null;
 
-    // TODO: Add upload button
+    const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        const file = fileRef.current.files[0];
+        event.preventDefault();
+        parseWav(file);
+    };
+
     return (
-        <div style={{ padding: '2vh' }}>
-            <div hidden={audio !== null}>Upload a .wav file below: <br /> <br /> </div>
-            <input type='file' accept='.wav' onChange={handleChange} hidden={audio !== null} />
+        <div style={{padding: '2vh'}}>
+            <Form onSubmit={onSubmit} hidden={audio !== null}>
+                <Form.Group controlId = 'controlInput1'>
+                    <Form.Label>Upload a .wav file below: </Form.Label> <br/>
+                    <input type='file' ref={fileRef} accept='.wav' required /> <br />
+                    <Button variant='primary' type='submit' style={{marginTop: '1em'}}>
+                        Submit
+                    </Button>
+                </Form.Group>
+            </Form>
             {graph}
             {autocorrelation}
             {difference}
