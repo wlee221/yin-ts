@@ -1,6 +1,6 @@
 import React from 'react';
 import { cumMeanNormDiff } from '../Algorithms/cmnd';
-import Graph from './Graph';
+import { Graph } from './Graph';
 
 type Prop = { audio: Float32Array };
 
@@ -8,14 +8,12 @@ type Prop = { audio: Float32Array };
 const windowSize = 500;
 const startTime = 1000;
 
-const Cmnd: React.FC<Prop> = ({ audio }: Prop) => {
+export const Cmnd: React.FC<Prop> = ({ audio }: Prop) => {
     const { cmnd, freq } = cumMeanNormDiff(windowSize, startTime, audio);
     const graph = <Graph array={cmnd} title='cmnd' />;
     return <div>
         Cumulative Mean Normalized Difference:<br />
-        Frequency: {freq}.
+        Frequency: {freq}.<br />
         {graph}
     </div>;
 };
-
-export default Cmnd;

@@ -30,7 +30,8 @@
             4
         ],
         "prefer-const": "error",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
         "no-trailing-spaces": "warn",
         "quotes": [
             "error",

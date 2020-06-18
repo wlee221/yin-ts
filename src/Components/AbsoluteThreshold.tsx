@@ -7,12 +7,10 @@ type Prop = { audio: Float32Array };
 const windowSize = 1000;
 const startTime = 500;
 
-const AbsoluteThreshold: React.FC<Prop> = ({ audio }: Prop) => {
+export const AbsoluteThreshold: React.FC<Prop> = ({ audio }: Prop) => {
     const { freq } = absoluteTreshold(windowSize, startTime, audio);
     return <div>
         AbsoluteThreshold:<br />
         Frequency: {freq}.
     </div>;
 };
-
-export default AbsoluteThreshold;

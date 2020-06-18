@@ -2,11 +2,6 @@
     text-align: left;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
 .App-header {
     background-color: #282c34;
     padding: 2vh;
@@ -16,6 +11,14 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+}
+
+svg.ct-chart-bar, svg.ct-chart-line{
+	overflow: visible;
+}
+
+.App-body {
+    padding: 1em
 }
 
 .App-link {

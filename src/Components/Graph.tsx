@@ -7,7 +7,7 @@ type Prop = {
     title: string
 };
 
-const Graph: React.FC<Prop> = ({ array, windowSize, title }: Prop) => {
+export const Graph: React.FC<Prop> = ({array, windowSize, title}: Prop) => {
     if (!windowSize) windowSize = array.length;
     const numPoints = Math.min(windowSize, 1000);
 
@@ -35,15 +35,17 @@ const Graph: React.FC<Prop> = ({ array, windowSize, title }: Prop) => {
         axisX: {
             showGrid: false,
             showLabel: true,
+            labelOffset: {
+                x: -15,
+                y: 0
+            }
         },
     };
 
     return (
-        <div>
+        <React.Fragment>
             {title}, {windowSize} points:
             <ChartistGraph data={lineChartData} type={'Line'} options={chartOptions} />
-        </div>
+        </React.Fragment>
     );
 };
-
-export default Graph;
