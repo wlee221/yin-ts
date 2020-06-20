@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Header, Icon, Segment, Divider, Input, Message } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Button, Header, Icon, Segment, Input, Message } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 
 // Users can upload their own .wav file or use an example file given.
@@ -11,7 +11,6 @@ type UploadState = {
 
 export const Upload: React.FC<{}> = () => {
     const [uploadState, setUploadState] = useState<UploadState>({ status: 'notUploaded' });
-    const [submitted, setSubmitted] = useState<boolean>(false);
     const history = useHistory();
 
     console.log(uploadState);
