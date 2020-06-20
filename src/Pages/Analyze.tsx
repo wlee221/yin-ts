@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { RouteChildrenProps, useHistory } from 'react-router-dom';
 import { AbsoluteThreshold, Autocorrelation, Cmnd, Difference, Interpolation, Graph } from '../Components';
-import { Button } from 'react-bootstrap';
-
+import { Button, Icon, Message } from 'semantic-ui-react';
 type PropType = RouteChildrenProps<{}, { file: File }>;
 
 export const Analyze: React.FC<PropType> = (props: PropType) => {
+    console.log(props);
     const [audio, setAudio] = useState<Float32Array>();
     const history = useHistory();
 
@@ -48,7 +48,12 @@ export const Analyze: React.FC<PropType> = (props: PropType) => {
         history.goBack();
     };
 
-    if (!audio) return <div>Processing audio...</div>;
+    if (!audio) return <Message icon>
+        <Icon name='circle notched' loading  />
+        <Message.Content>
+            <Message.Header>Analyzing...</Message.Header>
+        </Message.Content>
+    </Message>;
 
     return <div>
         <Graph array={audio} windowSize={1000} title="Waveform" />
