@@ -32,7 +32,7 @@ export const Upload: React.FC<{}> = () => {
         fetch(filePath)
             .then(res => res.blob())
             .then(blob => {
-                const file = new File([blob], '');
+                const file = new File([blob], 'Piano.pp.A3.wav');
                 setUploadState({ file, status: 'exampleFile' });
             })
             .catch(console.error);
