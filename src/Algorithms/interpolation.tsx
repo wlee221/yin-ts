@@ -5,7 +5,7 @@
  * @param audio {Float32Array} - Decoded audio array
  */
 
-import { absoluteTreshold } from './absoluteThreshold';
+import { absoluteThreshold } from './absoluteThreshold';
 import * as Util from '../Util/util';
 
 export const interpolate = (window: number, startIndex: number, audio: Float32Array) => {
@@ -14,7 +14,7 @@ export const interpolate = (window: number, startIndex: number, audio: Float32Ar
     } else if (startIndex + window >= audio.length) {
         throw new Error('Given window goes out of bound of the audio.');
     }
-    const { cmnd, freq: absThresholdFreq, minIndex } = absoluteTreshold(window, startIndex, audio); // cmnd function computed from step 3
+    const { cmnd, freq: absThresholdFreq, minIndex } = absoluteThreshold(window, startIndex, audio); // cmnd function computed from step 3
     if (minIndex === 0 || minIndex === cmnd.length - 1) {
         return { cmnd, freq: absThresholdFreq }; // not enough points to interpolate
     }

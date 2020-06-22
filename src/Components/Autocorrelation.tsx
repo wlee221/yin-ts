@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { autocorrelate } from '../Algorithms/autocorrelate';
 import { Graph } from './Graph';
+import { FormState } from '../Pages/Analyze';
 
-type Prop = { audio: Float32Array };
+type Prop = { audio: Float32Array, input: FormState }; // TODO: reverse the import direction
+type StateType = { acf: number[], freq: number };
 
-// TODO: Make them adjustable
-const windowSize = 500;
-const startTime = 1000;
+export const Autocorrelation: React.FC<Prop> = ({ audio, input }: Prop) => {
+    const [state, setState] = useState<StateType>();
+    useEffect(() => {
+        console.log('Computing autocorrelation');
+        const result = autocorrelate(input.windowSize, input.time, audio);
+        setState(result);
+    }, [audio, input]);
 
-export const Autocorrelation: React.FC<Prop> = ({ audio }: Prop) => {
-    const { acf, freq } = autocorrelate(windowSize, startTime, audio);
+    if (!state) return null;
+    const { acf, freq } = state;
     const graph = <Graph array={acf} title='Autocorrelation Function' />;
     return <div>
         Autocorrelation:<br />

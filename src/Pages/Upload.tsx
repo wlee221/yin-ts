@@ -94,7 +94,7 @@ export const Upload: React.FC<{}> = () => {
             {error}
             <br />
             {uploadState.error ? null : <br />}
-            <Button onClick={() => history.goBack()} floated='left' content={'Back'} />
+            <Button onClick={() => history.push('/')} floated='left' content={'Back'} />
             <Button primary onClick={onSubmit} floated='right' content={'Continue'} />
             <br /> <br /> <br />
             <p>* The example wav file is from&nbsp;

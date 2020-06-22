@@ -4,14 +4,16 @@ import ChartistGraph from 'react-chartist';
 type Prop = {
     array: Float32Array | Array<number>,
     windowSize?: number,
+    startTime ?: number,
     title: string
 };
 
-export const Graph: React.FC<Prop> = ({array, windowSize, title}: Prop) => {
+export const Graph: React.FC<Prop> = ({array, windowSize, startTime, title}: Prop) => {
     if (!windowSize) windowSize = array.length;
+    if (!startTime) startTime = 0;
     const numPoints = Math.min(windowSize, 1000);
 
-    array = array.slice(0, windowSize);
+    array = array.slice(startTime, startTime + windowSize);
     const downsampledAudio: Array<number> = [];
 
     for (let i = 0; i <= numPoints; i++) {

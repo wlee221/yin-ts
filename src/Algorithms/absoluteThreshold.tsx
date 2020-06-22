@@ -8,7 +8,7 @@
 import { cumMeanNormDiff } from './cmnd';
 import * as Util from '../Util/util';
 
-export const absoluteTreshold = (window: number, startIndex: number, audio: Float32Array) => {
+export const absoluteThreshold = (window: number, startIndex: number, audio: Float32Array) => {
     if (window >= audio.length) {
         throw new Error('window size must be smaller than the size of the audio');
     } else if (startIndex + window >= audio.length) {

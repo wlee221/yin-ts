@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { difference } from '../Algorithms/difference';
 import { Graph } from './Graph';
+import { FormState } from '../Pages/Analyze';
 
-type Prop = { audio: Float32Array };
+type Prop = { audio: Float32Array, input: FormState };
+type StateType = { diff: number[], freq: number }
 
-// TODO: Make them adjustable
-const windowSize = 500;
-const startTime = 1000;
+export const Difference: React.FC<Prop> = ({ audio, input }: Prop) => {
+    const [state, setState] = useState<StateType>();
+    useEffect(() => {
+        console.log('Computing difference');
+        const result = difference(input.windowSize, input.time, audio);
+        setState(result);
+    }, [audio, input]);
 
-export const Difference: React.FC<Prop> = ({ audio }: Prop) => {
-    const { diff, freq } = difference(windowSize, startTime, audio);
+    if (!state) return null;
+    const { diff, freq } = state;
+
     const graph = <Graph array={diff} title='Difference Function' />;
     return <div>
         Difference:<br />
