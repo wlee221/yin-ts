@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { cumMeanNormDiff } from '../Algorithms/cmnd';
 import { Graph } from './Graph';
 import { FormState } from '../Pages/Analyze';
+import { Header } from 'semantic-ui-react';
 
 type Prop = { audio: Float32Array, input: FormState };
 type StateType = { cmnd: number[], freq: number };
@@ -19,8 +20,8 @@ export const Cmnd: React.FC<Prop> = ({ audio, input }: Prop) => {
 
     const graph = <Graph array={cmnd} title='cmnd' />;
     return <div>
-        Cumulative Mean Normalized Difference:<br />
-        Frequency: {freq}.<br />
+        <Header>Step 3. Cumulative Mean Normalized Difference:</Header>
+        Frequency: {freq} Hz<br />
         {graph}
     </div>;
 };

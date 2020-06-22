@@ -14,7 +14,7 @@ export const Analyze: React.FC<PropType> = (props: PropType) => {
     const [currentFormState, setCurrentFormState] = useState<FormState>({
         windowSize: 500,
         time: 1000,
-        tuning: 432
+        tuning: 440
     });
     const [submittedForm, setSubmittedForm] = useState<FormState>(currentFormState);
     const history = useHistory();
@@ -51,7 +51,7 @@ export const Analyze: React.FC<PropType> = (props: PropType) => {
         reader.onloadstart = (() => { console.log('load started'); });
         reader.readAsArrayBuffer(file);
     };
-    useEffect(parseWav, []); // run when it is mounted // TODO: test going back home then returning with new file
+    useEffect(parseWav, []); // run when it is mounted // TODO: parse after the form is submitted
 
     if (!props.location.state || !props.location.state.file) {
         history.push('/upload');
@@ -99,10 +99,10 @@ export const Analyze: React.FC<PropType> = (props: PropType) => {
             <Form.Group widths='equal'>
                 <Form.Input
                     fluid value={currentFormState.windowSize} type='number' name='windowSize'
-                    onChange={handleChange} label='Window Size (ms)' placeholder=''
+                    onChange={handleChange} label='Window Size (samples)' placeholder=''
                 />
                 <Form.Input
-                    fluid type='number' name='time' onChange={handleChange} label='Time (ms)'
+                    fluid type='number' name='time' onChange={handleChange} label='Time (samples)'
                     value={currentFormState.time} placeholder='1000'
                 />
                 <Form.Select
@@ -116,7 +116,7 @@ export const Analyze: React.FC<PropType> = (props: PropType) => {
 
     // TODO: separate this to a separate file
     const analysisJSX = <React.Fragment>
-        <Header>Result:</Header>
+        <Header size='large'>Result:</Header>
         <Graph array={audio} windowSize={submittedForm.windowSize} startTime={submittedForm.time} title="Given Waveform" />
         <Autocorrelation audio={audio} input={submittedForm} />
         <Difference audio={audio} input={submittedForm} />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { difference } from '../Algorithms/difference';
 import { Graph } from './Graph';
 import { FormState } from '../Pages/Analyze';
+import { Header } from 'semantic-ui-react';
 
 type Prop = { audio: Float32Array, input: FormState };
 type StateType = { diff: number[], freq: number }
@@ -18,9 +19,10 @@ export const Difference: React.FC<Prop> = ({ audio, input }: Prop) => {
     const { diff, freq } = state;
 
     const graph = <Graph array={diff} title='Difference Function' />;
+
     return <div>
-        Difference:<br />
-        Frequency: {freq}.<br />
+        <Header>Step 2. Difference:</Header>
+        Frequency: {freq} Hz.<br />
         {graph}
     </div>;
 };

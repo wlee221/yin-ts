@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { absoluteThreshold } from '../Algorithms/absoluteThreshold';
 import { FormState } from '../Pages/Analyze';
+import { Header } from 'semantic-ui-react';
 
 type Prop = { audio: Float32Array, input: FormState };
 
@@ -13,7 +14,7 @@ export const AbsoluteThreshold: React.FC<Prop> = ({ audio, input }: Prop) => {
     }, [audio, input]);
     if (!freq) return null;
     return <div>
-        AbsoluteThreshold:<br />
-        Frequency: {freq}.
+        <Header>AbsoluteThreshold:</Header>
+        Frequency: {freq} Hz <br />
     </div>;
 };

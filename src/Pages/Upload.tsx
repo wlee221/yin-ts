@@ -15,12 +15,6 @@ export const Upload: React.FC<{}> = () => {
 
     console.log(uploadState);
 
-    // useEffect(() => {
-    //     if (submitted === true) {
-    //         history.push('/analyze', formState);
-    //     }
-    // });
-
     const uploadExampe = (event) => {
         event.target.blur(); // don't retain focus after clicking
         let filePath: string;
@@ -60,6 +54,7 @@ export const Upload: React.FC<{}> = () => {
         <br />
         <Button.Group>
             <Button
+                // TODO: reduce the file name if too long
                 as='label'
                 htmlFor='wavUpload'
                 icon='upload'
@@ -97,7 +92,7 @@ export const Upload: React.FC<{}> = () => {
             <Button onClick={() => history.push('/')} floated='left' content={'Back'} />
             <Button primary onClick={onSubmit} floated='right' content={'Continue'} />
             <br /> <br /> <br />
-            <p>* The example wav file is from&nbsp;
+            <p>* The example wav file is an <b>A3</b> pitch audio from&nbsp;
                 <a rel="noopener noreferrer" href='http://theremin.music.uiowa.edu/MISpiano.html' target='_blank'>
                     University of Iowa Electronic Music Studios.</a>
             </p>
